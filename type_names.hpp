@@ -23,38 +23,16 @@
 #ifndef TYPE_NAMES_HPP
 #define TYPE_NAMES_HPP
 
-#include <algorithm>
 #include <string>
-#include <typeinfo>
 #include <values.h>
-#include <vector>
-#include <utility>
+#include <boost/type_index.hpp>
 
 using namespace std;
 
 template <typename T>
-string get_type_name()
+std::string get_type_name(void)
 {
-    string default_name(typeid(T).name());
-    static vector<pair<string,string> > default_names{
-        {typeid(char).name(),"char"},
-        {typeid(short).name(),"short"},
-        {typeid(int).name(),"int"},
-        {typeid(long).name(),"long"},
-        {typeid(long long).name(),"long long"},
-        {typeid(float).name(),"float"},
-        {typeid(double).name(),"double"},
-        {typeid(long double).name(),"long double"}
-    };
-
-    auto name_it = find_if(default_names.begin(),default_names.end(), [default_name](auto &names){return names.first == default_name;} );
-
-    if(name_it != default_names.end())
-    {
-        return name_it->second;
-    }
-
-    return default_name;
+    return boost::typeindex::type_id<T>().pretty_name();
 }
 
 #endif

@@ -33,7 +33,7 @@ using namespace std;
 template <typename T>
 void print_type_size(void)
 {
-    cout << setw(11) << get_type_name<T>() << " - bytes: " << setw(3) << sizeof(T) << "  bits: " << setw(3) << _TYPEBITS(T) << endl;
+    cout << setw(25) << get_type_name<T>() << " - bytes: " << setw(4) << sizeof(T) << "  bits: " << setw(5) << _TYPEBITS(T) << endl;
 }
 
 void print_basic_type_sizes(void)
