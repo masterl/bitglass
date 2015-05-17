@@ -32,7 +32,17 @@ void Class::execute(void)
         std::cout << _subject << "\n";
         std::cout << std::setw(_info_field_size) << _teacher << "\n";
         std::cout << slide.title << std::endl;
+        print_line();
+
         slide.action();
+
         wait_enter();
     }
+}
+
+void Class::print_line(void)
+{
+    char prev = std::cout.fill();
+
+    std::cout << std::setw(_info_field_size) << std::setfill('-') << "" << std::setfill(prev) << std::endl;
 }

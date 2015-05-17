@@ -21,6 +21,8 @@ class Class
         const std::string _teacher;
         unsigned int _info_field_size;
         std::vector<ClassSlide> _slides;
+
+        void print_line(void);
 };
 
 #endif
