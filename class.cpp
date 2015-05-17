@@ -29,7 +29,7 @@ void Class::execute(void)
     for(auto const &slide : _slides)
     {
         system(CLEAR);
-        std::cout << _subject << "\n";
+        std::cout << "Subject: " << _subject << "\n";
         std::cout << std::setw(_info_field_size) << _teacher << "\n";
         std::cout << slide.title << std::endl;
         print_line();
