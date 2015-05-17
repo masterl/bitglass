@@ -1,5 +1,7 @@
 #include "class.hpp"
 
+#include <iomanip>
+
 #ifdef __linux__
     #define CLEAR "clear"
 #else
@@ -27,7 +29,8 @@ void Class::execute(void)
     for(auto const &slide : _slides)
     {
         system(CLEAR);
-        std::cout << _subject << std::endl;
+        std::cout << _subject << "\n";
+        std::cout << std::setw(_info_field_size) << _teacher << "\n";
         std::cout << slide.title << std::endl;
         slide.action();
         wait_enter();

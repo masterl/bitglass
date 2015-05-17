@@ -58,7 +58,7 @@ void test_bits(void)
 
 int main(void)
 {
-    Class basic_types_class("Basic types");
+    Class basic_types_class("Basic types","Leonardo de Oliveira Lourenço");
 
     basic_types_class.add_slide("Sizes - bits and bytes",[] {
         print_type_size<char>();
