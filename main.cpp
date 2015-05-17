@@ -27,7 +27,7 @@
 #include <iomanip>
 
 #include "type_names.hpp"
-#include "class_executor.hpp"
+#include "class.hpp"
 
 using namespace std;
 
@@ -56,34 +56,11 @@ void test_bits(void)
     cout << "Bits: " << get_bits(value) << endl;
 }
 
-void example_char(void)
-{
-    unsigned char character;
-    bool jump_line = true;
-
-    for(character = ' '; character <= '}'; character += 3)
-    {
-        jump_line = !jump_line;
-        cout << "[" << character << "] -> ASCII: " << setw(3) << (int)character << " -> Bits: " << get_bits(character);
-        if(jump_line)
-        {
-            cout << '\n';
-        }
-        else
-        {
-            cout << "    ";
-        }
-    }
-    cout << endl;
-    wait_enter();
-}
-
 int main(void)
 {
-    ClassExecutor executor("Basic types");
+    Class basic_types_class("Basic types");
 
-
-    executor.add_slide("Sizes",[] {
+    basic_types_class.add_slide("Sizes - bits and bytes",[] {
         print_type_size<char>();
         print_type_size<short>();
         print_type_size<int>();
@@ -95,7 +72,27 @@ int main(void)
         print_type_size<void *>();
     });
 
-    executor.execute();
+    basic_types_class.add_slide("Character examples",[]{
+        unsigned char character;
+        bool jump_line = true;
+
+        for(character = ' '; character <= '}'; character += 3)
+        {
+            jump_line = !jump_line;
+            cout << "[" << character << "] -> ASCII: " << setw(3) << (int)character << " -> Bits: " << get_bits(character);
+            if(jump_line)
+            {
+                cout << '\n';
+            }
+            else
+            {
+                cout << "    ";
+            }
+        }
+        cout << endl;
+    });
+
+    basic_types_class.execute();
 
     // example_char();
     // return 0;
