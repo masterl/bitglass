@@ -27,26 +27,16 @@
 #include <iomanip>
 
 #include "type_names.hpp"
+#include "class_executor.hpp"
 
 using namespace std;
+
+
 
 template <typename T>
 void print_type_size(void)
 {
     cout << setw(25) << get_type_name<T>() << " - bytes: " << setw(4) << sizeof(T) << "  bits: " << setw(5) << _TYPEBITS(T) << endl;
-}
-
-void print_basic_type_sizes(void)
-{
-    cout << "\nSome basic types sizes:" << endl;
-    print_type_size<char>();
-    print_type_size<short>();
-    print_type_size<int>();
-    print_type_size<long>();
-    print_type_size<long long>();
-    print_type_size<float>();
-    print_type_size<double>();
-    print_type_size<long double>();
 }
 
 template <typename T>
@@ -66,17 +56,55 @@ void test_bits(void)
     cout << "Bits: " << get_bits(value) << endl;
 }
 
+void example_char(void)
+{
+    unsigned char character;
+    bool jump_line = true;
+
+    for(character = ' '; character <= '}'; character += 3)
+    {
+        jump_line = !jump_line;
+        cout << "[" << character << "] -> ASCII: " << setw(3) << (int)character << " -> Bits: " << get_bits(character);
+        if(jump_line)
+        {
+            cout << '\n';
+        }
+        else
+        {
+            cout << "    ";
+        }
+    }
+    cout << endl;
+    wait_enter();
+}
+
 int main(void)
 {
-    print_basic_type_sizes();
+    ClassExecutor executor("Basic types");
 
-    test_bits<char>();
-    test_bits<short>();
-    test_bits<int>();
-    test_bits<long>();
-    test_bits<long long>();
-    test_bits<float>();
-    test_bits<double>();
+
+    executor.add_slide("Sizes",[] {
+        print_type_size<char>();
+        print_type_size<short>();
+        print_type_size<int>();
+        print_type_size<long>();
+        print_type_size<long long>();
+        print_type_size<float>();
+        print_type_size<double>();
+        print_type_size<long double>();
+        print_type_size<void *>();
+    });
+
+    executor.execute();
+
+    // example_char();
+    // return 0;
+    // test_bits<short>();
+    // test_bits<int>();
+    // test_bits<long>();
+    // test_bits<long long>();
+    // test_bits<float>();
+    // test_bits<double>();
 
 
     return 0;

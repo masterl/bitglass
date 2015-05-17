@@ -46,5 +46,5 @@ all: $(EXEC)
 	@echo -e ' \nExecutable generated!'
 	@echo -e ' \t$(EXEC)'
 
-$(EXEC): main.cpp type_names.hpp
+$(EXEC): main.cpp type_names.hpp class_executor.hpp class_slide.hpp
 	$(CC) $(COMPFLAGS) main.cpp -o $(EXEC) $(LINKFLAGS)
