@@ -58,10 +58,13 @@ void test_bits(void)
 }
 
 template <typename T>
-void test_number_bits_on_range(T const &start,T const &end,T const &step)
+void test_number_bits_on_range(void)
 {
+    T const start = numeric_limits<T>::min();
+    T const end = numeric_limits<T>::max();
     T previous = start;
-    for(T value = start; value < end; value += step)
+    T auto_step = end/7 - start/7;
+    for(T value = start; value < end; value += auto_step)
     {
         if((previous > 0) && (value < 0))
         {
@@ -112,11 +115,27 @@ int main(void)
     });
 
     basic_types_class.add_slide("short examples",[]{
-        test_number_bits_on_range<short>(numeric_limits<short>::min(),numeric_limits<short>::max(),10000);
+        test_number_bits_on_range<short>();
     });
 
     basic_types_class.add_slide("int examples",[]{
-        test_number_bits_on_range<int>(numeric_limits<int>::min(),numeric_limits<int>::max(),500000000);
+        test_number_bits_on_range<int>();
+    });
+
+    basic_types_class.add_slide("long examples",[]{
+        test_number_bits_on_range<long>();
+    });
+
+    basic_types_class.add_slide("long long examples",[]{
+        test_number_bits_on_range<long long>();
+    });
+
+    basic_types_class.add_slide("float examples",[]{
+        test_number_bits_on_range<float>();
+    });
+
+    basic_types_class.add_slide("double examples",[]{
+        test_number_bits_on_range<double>();
     });
 
     basic_types_class.execute();
