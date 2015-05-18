@@ -25,6 +25,7 @@
 #include <string>
 #include <typeinfo>
 #include <iomanip>
+#include <limits>
 
 #include "type_names.hpp"
 #include "class.hpp"
@@ -54,6 +55,24 @@ void test_bits(void)
     cout << "\nInput an " << get_type_name<T>() << ": ";
     cin >> value;
     cout << "Bits: " << get_bits(value) << endl;
+}
+
+template <typename T>
+void test_number_bits_on_range(T const &start,T const &end,T const &step)
+{
+    T previous = start;
+    for(T value = start; value < end; value += step)
+    {
+        if((previous > 0) && (value < 0))
+        {
+            break;
+        }
+
+        cout << "Number: " << value << "\n"
+             << "  Bits: " << get_bits(value) << "\n";
+
+        previous = value;
+    }
 }
 
 int main(void)
@@ -92,10 +111,16 @@ int main(void)
         cout << endl;
     });
 
+    basic_types_class.add_slide("short examples",[]{
+        test_number_bits_on_range<short>(numeric_limits<short>::min(),numeric_limits<short>::max(),10000);
+    });
+
+    basic_types_class.add_slide("int examples",[]{
+        test_number_bits_on_range<int>(numeric_limits<int>::min(),numeric_limits<int>::max(),500000000);
+    });
+
     basic_types_class.execute();
 
-    // example_char();
-    // return 0;
     // test_bits<short>();
     // test_bits<int>();
     // test_bits<long>();

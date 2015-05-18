@@ -30,7 +30,7 @@
 using namespace std;
 
 template <typename T>
-std::string get_type_name(void)
+inline std::string get_type_name(void)
 {
     return boost::typeindex::type_id<T>().pretty_name();
 }
